@@ -1,0 +1,8 @@
+Esto es
+un fichero de
+texto
+para
+probar ficheros
+en Python
+en las practicas de
+fundamentos de informatica

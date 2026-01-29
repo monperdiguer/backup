@@ -1,0 +1,9 @@
+a=int(input("Introduzca a: "))
+b=int(input("Introduzca b: "))
+cociente=0
+resto=a
+while resto>=b:
+    resto=resto-b
+    cociente=cociente+1
+print("Cociente: ", a, "//", b,"=",cociente)
+print("Resto: ", a,"%", b,"=", resto)
