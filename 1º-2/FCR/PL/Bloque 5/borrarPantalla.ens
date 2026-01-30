@@ -1,0 +1,21 @@
+ORIGEN 0500h
+.CODIGO
+movl r0, 00h
+movh r0, 0F0h ; Registro de datos 
+movl r1, 01h
+movh r1, 0F0h ; Registro de control 
+movl r2, 01h
+movh r2, 00h ; Máscara de comprobacion bit 0
+movl r3, 0FFh
+movh r3, 00h ; Máscara para borrar el codigo scan de pulsacion
+
+bucle:
+mov r4, [r1]
+add r4, r4, r2
+brz bucle
+
+mov r5, [r0] ; Transferencia de datos
+
+and r5, r5, r3 ; Borrar tecla
+FIN
+

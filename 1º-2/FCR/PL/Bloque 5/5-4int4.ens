@@ -1,0 +1,55 @@
+ORIGEN 300h
+.PILA 20h
+.CODIGO
+  MOVL  R0, 3  ; Vector a modificar
+  MOVH  R0, 0
+  MOVL  R1, BYTEBAJO DIRECCION rutina_util
+  MOVH  R1, BYTEALTO DIRECCION rutina_util
+  MOVL R2, 00h
+  MOVH R2, 0F0h ; direccion de la primera celda de la pantalla
+  MOV [R0] ,R1
+  MOV [R2], R1
+  STI       ; Permitir interrupciones
+
+  ; Una vez instalada la rutina, el programa
+  ; principal se encierra en un bucle infinito
+PorSiempre:
+  MOVL R0, 00h
+  MOVH R0, 0F0h
+  MOVL R1, 40h
+  MOVH R1, 07h
+  MOVL R2, 78h
+  MOVH R2, 0F0h
+  
+  MOV [R0], R1
+  INC R0
+  CMP R0, R2
+  brz bucle
+  JMP PorSiempre
+bucle:
+  MOVL R0, 00h
+  MOVH R0, 0F0h
+  JMP PorSiempre
+
+; Y esta sería la rutina util:
+PROCEDIMIENTO rutina_util
+  push R6
+  MOV R6, R7
+  push R0
+  push R1
+  push R2
+  MOVL  R0, 00h  ; Vector a modificar
+  MOVH  R0, 0E0h
+  MOV  R1 , [R0]; Lee los interruptores
+ 
+  MOV [R2], R1
+  MOV [R0] ,R1 ; Enciende Luces
+  inc R2
+  pop R2
+  pop R1
+  pop R0
+  pop R6
+  IRET
+FINP
+
+FIN

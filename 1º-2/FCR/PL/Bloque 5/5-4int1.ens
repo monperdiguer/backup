@@ -1,0 +1,21 @@
+ORIGEN 300h
+.PILA 20h
+.CODIGO
+  MOVL  R0, 3  ; Vector a modificar
+  MOVH  R0, 0
+  MOVL  R1, BYTEBAJO DIRECCION rutina_minima
+  MOVH  R1, BYTEALTO DIRECCION rutina_minima
+  MOV [R0] ,R1
+  STI       ; Permitir interrupciones
+
+  ; Una vez instalada la rutina, el programa
+  ; principal se encierra en un bucle infinito
+PorSiempre:
+  JMP PorSiempre
+
+; Y esta sería la rutina minima:
+PROCEDIMIENTO rutina_minima
+  IRET
+FINP
+
+FIN

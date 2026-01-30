@@ -1,0 +1,23 @@
+ORIGEN 0500h
+.DATOS
+ cad VALOR "Hola, mundo",0
+.CODIGO
+movl r0, 00h
+movh r0, 0F0h
+movl r1, BYTEBAJO DIRECCION cad
+movh r1, BYTEALTO DIRECCION cad
+xor r3,r3,r3
+
+bucle:
+	mov r2, [r1]
+	cmp r2, r3
+	brz final
+	movh r2, 02h
+	mov [r0], r2
+	inc r0
+	inc r1
+	jmp bucle
+final:
+FIN
+	
+	

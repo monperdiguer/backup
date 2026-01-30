@@ -1,0 +1,10 @@
+ORIGEN 0500h
+INICIO primera
+.CODIGO
+primera:
+movl r0, 00h
+movh r0, 0F0h
+movl r1, '*'
+movh r1, 7h ; código de blanco
+mov [r0], r1
+FIN

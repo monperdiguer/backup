@@ -1,0 +1,30 @@
+ORIGEN 300h
+.CODIGO
+  movl r0, 01h          ; Cargar la dirección del registro de estado
+  movh r0, 0F7h          ; y control del teclado en R0
+
+  movl r1, 00h          ; Cargar la máscara en R1
+  movh r1, 01h
+
+  movl r3, 00h          ; Cargar en R3 la dirección de la primera celda
+  movh r3, 0F0h          ; de pantalla
+
+  movl r4, '*'          ; Cargar lo necesario para imprimir un asterisco
+  movh r4, 7h    ; en color blanco sobre fondo negro
+
+movl r6, 00h
+movh r6, 0F7h 
+  
+bucle:
+  mov r2, [r0]          ; Leer el registro de estado y control a R2
+  and r2, r2, r1        ; Realizar operación con la máscara
+  brz bucle            ; Si no se pulsó tecla, volver al principio del bucle
+
+  ; Si estamos aquí, se pulsó tecla. Imprimir un asterisco
+  
+  mov r5, [r6]
+  mov [r3], r4          ; Escribir asterisco
+  inc r3                ; Avanzar a la sgte. posición de pantalla
+  jmp bucle             ; Volver al bucle a ver si se pulsan más teclas
+
+FIN
