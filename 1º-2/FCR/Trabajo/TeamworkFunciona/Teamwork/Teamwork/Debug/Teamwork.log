@@ -1,0 +1,6 @@
+﻿  Teamwork.cpp
+C:\Users\moper\Desktop\TeamworkFunciona\Teamwork\Teamwork.cpp(33,10): warning C4459: la declaración de 'ID' oculta la declaración global
+      C:\Users\moper\Desktop\TeamworkFunciona\Teamwork\Teamwork.cpp(14,6):
+      vea la declaración de 'ID'
+  
+  Teamwork.vcxproj -> C:\Users\moper\Desktop\TeamworkFunciona\Teamwork\Debug\Teamwork.exe
