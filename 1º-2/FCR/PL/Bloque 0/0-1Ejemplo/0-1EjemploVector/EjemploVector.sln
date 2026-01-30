@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EjemploVector", "EjemploVector.vcxproj", "{BACB22FA-CB8B-4004-8E9F-A4B1D56FF404}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BACB22FA-CB8B-4004-8E9F-A4B1D56FF404}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BACB22FA-CB8B-4004-8E9F-A4B1D56FF404}.Debug|Win32.Build.0 = Debug|Win32
+		{BACB22FA-CB8B-4004-8E9F-A4B1D56FF404}.Release|Win32.ActiveCfg = Release|Win32
+		{BACB22FA-CB8B-4004-8E9F-A4B1D56FF404}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,6 @@
+﻿  2-Reales.cpp
+E:\FCR\Bloque 1\2-Reales\2-Reales.cpp(13,11): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+E:\FCR\Bloque 1\2-Reales\2-Reales.cpp(14,11): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+E:\FCR\Bloque 1\2-Reales\2-Reales.cpp(19,27): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+E:\FCR\Bloque 1\2-Reales\2-Reales.cpp(31,7): warning C4309: '=': truncamiento de valor constante
+  2-Reales.vcxproj -> E:\FCR\Bloque 1\2-Reales\Debug\2-Reales.exe

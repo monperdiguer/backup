@@ -1,0 +1,5 @@
+﻿  Ejemplo.cpp
+C:\Users\uo306389\Desktop\FCR\Bloque 0\0-1Ejemplo\Ejemplo.cpp(65,12): warning C4101: 'pF': variable local sin referencia
+C:\Users\uo306389\Desktop\FCR\Bloque 0\0-1Ejemplo\Ejemplo.cpp(64,10): warning C4101: 'pI': variable local sin referencia
+C:\Users\uo306389\Desktop\FCR\Bloque 0\0-1Ejemplo\Ejemplo.cpp(59,10): warning C4101: 'cadena': variable local sin referencia
+  0-1Ejemplo.vcxproj -> C:\Users\uo306389\Desktop\FCR\Bloque 0\0-1Ejemplo\Debug\0-1Ejemplo.exe
