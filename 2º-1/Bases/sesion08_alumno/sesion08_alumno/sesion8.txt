@@ -1,0 +1,129 @@
+create or replace function getInfoGrados()
+returns table(nombre varchar(100), numero smallint) as $$
+begin
+
+return query
+select gra.grado_nombre, gra.numero_estudiantes 
+from grado gra
+where numero_estudiantes= (select min(numero_estudiantes) from grado);
+
+end;
+$$ language plpgsql;
+
+select getInfoGrados();
+
+create or replace function getAulas()
+returns table(nombre varchar(25), numero_profesores bigint) as $$
+begin
+
+return query
+select au.aula_nombre, count(*)  
+from aula au, profesor pro, modulo_profesor_aula mta 
+where au.aula_id=mta.aula_id and mta.profesor_id=pro.profesor_id 
+group by(au.aula_id) 
+having count(pro.profesor_id) >2;
+
+end;
+$$ language plpgsql;
+
+select getAulas();
+
+create or replace function getGradoMinEstudiantes()
+returns table(nombre varchar(25), numero_estudiantes bigint) as $$
+begin
+
+return query
+select gra.grado_nombre, count(*) 
+from grado gra inner join estudiante_grado_modulo using(grado_id)
+inner join modulo mod using(modulo_id) group by grado_id having(count(*)) <= all
+(select count(*) from grado gra inner join estudiante_grado_modulo using 
+(grado_id) inner join modulo using(modulo_id) group by gra.grado_id);
+
+end;
+$$ language plpgsql;
+
+select getGradoMinEstudiantes();
+
+create or replace procedure  getCapacidadTotalAula(inout numtotal int) as $$
+begin
+	select sum(capacidad) into numtotal from aula;  
+
+end;
+$$ language plpgsql;
+
+call getCapacidadTotalAula(0);
+
+create or replace function getEstudiantesIngenieriaIndustrial() 
+returns table(nombre varchar(100), apellidos varchar(150))
+as $$
+begin
+
+return query
+select estudiante_nombre, estudiante_apellidos from estudiante est  
+inner join estudiante_grado_modulo egm using(estudiante_id)  
+inner join grado gra using(grado_id)  
+where lower(gra.grado_nombre)= 'Ingenieria Quimica Industrial'  
+union 
+select estudiante_nombre, estudiante_apellidos from estudiante est where 
+est.erasmus=true; 
+
+end;
+$$ language plpgsql;
+
+select getEstudiantesIngenieriaIndustrial();
+
+create or replace procedure getEstudiantesIngenieriaIndustrialbis() 
+as $$
+declare
+	r record;
+	
+begin
+
+for r in
+
+select estudiante_nombre, estudiante_apellidos from estudiante est  
+inner join estudiante_grado_modulo egm using(estudiante_id)  
+inner join grado gra using(grado_id)  
+where lower(gra.grado_nombre)= 'Ingenieria Quimica Industrial'  
+union 
+select estudiante_nombre, estudiante_apellidos from estudiante est where 
+est.erasmus=true
+
+loop
+	raise notice '(%,%)', r.estudiante_nombre, r.estudiante_apellidos;
+end loop;
+
+end;
+$$ language plpgsql;
+
+call getEstudiantesIngenieriaIndustrialbis();
+
+create or replace procedure getProfesoresComputacionNoAlgoritmia(n int) 
+as $$
+declare
+	r record;
+	num integer default 0;
+	
+begin
+
+while num <> n loop
+	num = num +1;
+	
+	select profesor_nombre, profesor_apellidos into r
+	from profesor pro  
+	inner join departamento dep using(departamento_id)  
+	where dep.departamento_nombre= 'Ciencias de la Computacion' 
+	except 
+	select profesor_nombre, profesor_apellidos
+	from profesor pro  
+	inner join modulo_profesor_aula mpa using(profesor_id)  
+	inner join modulo mod using(modulo_id)  
+	where lower(mod.modulo_nombre)='algoritmia';
+	
+	raise notice '(%,%)', r.profesor_nombre, r.profesor_apellidos;
+end loop;
+	
+end;
+$$ language plpgsql;
+
+call getProfesoresComputacionNoAlgoritmia();
