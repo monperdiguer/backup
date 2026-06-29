@@ -1,0 +1,82 @@
+SELECT c.id_cientifico,
+c.nombre,
+c.apellidos,
+co.descripcion
+FROM cientifico c
+JOIN cientifico_contribucion cc
+ON c.id_cientifico = cc.id_cientifico
+JOIN contribucion co
+ON cc.id_contribucion = co.id_contribucion
+WHERE c.anio_nacimiento BETWEEN 1940 AND 2000
+AND c.id_cientifico IN (
+SELECT id_cientifico
+FROM cientifico_contribucion
+GROUP BY id_cientifico
+HAVING COUNT(DISTINCT id_contribucion) = 1
+)
+ORDER BY c.apellidos DESC;
+
+SELECT c.nombre,
+c.apellidos,
+a.nombre AS nombre_aplicacion
+FROM cientifico c
+LEFT JOIN cientifico_contribucion cc
+ON c.id_cientifico = cc.id_cientifico
+LEFT JOIN contribucion_aplicacion ca
+ON cc.id_contribucion = ca.id_contribucion
+LEFT JOIN aplicacion a
+ON ca.id_aplicacion = a.id_aplicacion
+WHERE LOWER(c.apellidos) LIKE '%a%'
+LIMIT 4;
+
+
+SELECT c.nombre,
+c.apellidos
+FROM cientifico c
+JOIN cientifico_contribucion cc
+ON c.id_cientifico = cc.id_cientifico
+JOIN contribucion_aplicacion ca
+ON cc.id_contribucion = ca.id_contribucion
+GROUP BY c.id_cientifico, c.nombre, c.apellidos
+HAVING COUNT(DISTINCT ca.id_aplicacion) > 2
+)
+INTERSECT
+(
+SELECT c.nombre,
+c.apellidos
+FROM cientifico c
+JOIN cientifico_estudios ce
+ON c.id_cientifico = ce.id_cientifico
+JOIN estudios e
+ON ce.id_estudios = e.id_estudios
+WHERE e.pais IN ('UK', 'Suiza')
+);
+
+
+SELECT c.nombre,
+c.apellidos
+FROM cientifico c
+WHERE EXISTS (
+SELECT 1
+FROM cientifico_contribucion cc
+JOIN contribucion co
+ON cc.id_contribucion = co.id_contribucion
+WHERE cc.id_cientifico = c.id_cientifico
+AND co.descripcion = 'Protocolo de comunicación entre redes'
+)
+AND NOT EXISTS (
+SELECT 1
+FROM contribucion_aplicacion ca_obj
+JOIN contribucion co_obj
+ON ca_obj.id_contribucion = co_obj.id_contribucion
+WHERE co_obj.descripcion = 'Transmisión de documentos entre redes'
+AND NOT EXISTS (
+SELECT 1
+FROM cientifico_contribucion cc2
+JOIN contribucion_aplicacion ca2
+ON cc2.id_contribucion = ca2.id_contribucion
+WHERE cc2.id_cientifico = c.id_cientifico
+AND ca2.id_aplicacion = ca_obj.id_aplicacion
+)
+);
+ 
