@@ -1,0 +1,109 @@
+select p.id_paciente, p.nombre,
+en.id_enfermedad, en.nombre
+count (*) en numero_ingresos
+from pacientes p inner join estancias es
+on p.id_paciente = es.id_paciente
+inner join enfermedades en
+on es.id_enfermedad = en.id_enfermedad
+group by en.id_enfermedad
+having count(*) >=2
+order by en.nombre;
+
+select *
+from doctores d1 inner join
+trabajar_doctores tdl
+on dl.id_doctor = tdl.id_doctor
+where salario_anual >
+(select avg(salario_anual)
+from doctores d2 inner join
+trabajar_doctores tdl
+on d2.id_doctor = td2.id_doctor
+where  td1.id_hospital = td2.id_hospital)
+group by id_hospital;
+
+select d.nombre from doctores d
+inner join trabajar_doctores td
+ on d.id_doctor = td.id_doctor 
+ inner join hospitales h on
+ td.id_hospital = h.id_hospital
+ where h.nombre in('La Paz' , 'General','San Carlos');
+ 
+select d.nombre from doctores d
+inner join trabajar_doctores td
+ on d.id_doctor = td.id_doctor
+ where id_hospital in 
+ (select id_hospital from hospitales where nombre = 'La Paz'
+ or nombre = 'General' or nombre = 'San Carlos');
+ 
+ select count(*)
+ from hospitales h join 
+ directores d
+ on h.id_hospital = d.id_hospital
+ where d.plus > 12000;
+ 
+ select id_hospital, id_turno, count(*)
+ from plantilla plgroup by id_hospital,nombre;
+ 
+select round(avg(salario_anual),2)
+from doctores d inner join
+trabajar_doctores td
+on d.id_doctor = td.id_doctor
+where id_hospital = 18;
+
+select round(avg(salario_anual),2)
+from doctores d inner join
+trabajar_doctores td
+on d.id_doctor = td.id_doctor
+inner join hospitales h
+on td.id_hospital = h.id_hospital
+where lower(h.nombre) = 'general';
+
+select h.id_hospital, h.nombre, min(salario_anual), max(salario_anual)
+from doctores d inner join
+trabajar_doctores td
+on d.id_doctor = td.id_doctor
+inner join hospitales h 
+on td.id_hospital = h.id_hospital
+group by h.id_hospital;
+
+select id_hospital, cod_sala, count(*) as numero_pacientes
+from estancias
+group by id_hospital, cod_sala;
+
+select id_hospital, count(*) as numero_pacientes
+from estancias es
+inner join enfermedades en
+on es.id_enfermedad = en.id_enfermedad
+where lower(nombre) = 'gripe'
+group by id_hospital;
+
+select ed.nombre, count(*) as numero_doctores,
+	round(avg(salario_anual), 2) as salario_anual_medio
+from especialidades_doctores ed inner join doctores d
+on ed.id_especialidad = d.id_especialidad
+group by ed.nombre
+having count(*) >= 2;
+
+select nombre, count(*) as numero_pacientes
+from enfermedades en inner join estancias as
+on en.id_enfermedad = es.id_enfermedad
+group by nombre
+having count(*) >2;
+
+select id_hospital, nombre
+from doctores d inner join dirigir_hospitales dh
+on d.id_doctor = dh.id_doctor
+where plus > (select avg(plus) from dirigir_hospitales);
+
+select nombre
+from empleados em1 inner join plantilla pl1
+on em1.id_empleado = pl1.id_empleado
+inner join turnos_plantillas tp1
+on pl1.id_turno = tp1.id_turno
+where lower(tp1.nombre) = 'tarde'
+and salario_anual < (select avg(salario_anual)
+	from empleados em2 inner join plantilla pl2
+	on em2.id_empleado = pl2.id_empleado
+	inner join turnos_plantillas tp2
+	on pl2.id_turno = tp2.id_turno
+	where pl1.id_turno = tp2.id_turno);
