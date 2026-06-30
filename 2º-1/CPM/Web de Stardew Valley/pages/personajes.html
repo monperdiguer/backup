@@ -1,0 +1,134 @@
+<!-- ReqH1 -->
+<!DOCTYPE html>
+<html lang="es-ES">
+    <!-- ReqH2 -->
+    <head>
+        <meta charset = "utf-8">
+            <meta name= "viewport" content = "width=device-width, initial-scale=1.0">
+            <meta name="author" content = "Mónica Perdiguer Caso">
+            <meta name="description" content= "Página de información sobre los personajes de Stardew Valley">
+            <meta name="keywords" content= "Stardew Valley, personajes, NPC, aldeanos, bachelors">
+        <title>Personajes de Stardew Valley</title>
+        <link rel="stylesheet" href="../css/styles.css">
+        <link rel="stylesheet" href="../css/single-page.css">
+    
+        <script defer src="../js/i18n/translations.js"></script>
+        <script defer src="../js/i18n/i18n.js"></script>
+    </head>
+
+    <body>
+        <!-- ReqH3 -->
+        <header>
+            <!-- ReqI18N6 -->
+            <div class="language-box"> 
+                <label for="language-switcher" data-i18n="common.language.label">Idioma</label> 
+                <select id="language-switcher" onchange="setLocale(this.value)"> 
+                    <option value="es" data-i18n="common.language.spanish">Español</option> 
+                    <option value="en" data-i18n="common.language.english">English</option> 
+                </select> 
+            </div>
+            <!-- ReqH5 -->
+            <h1 data-i18n="personajes.titulo">Personajes de Stardew Valley</h1>
+        </header>
+
+        <!-- RequH8 -->
+        <nav>
+            <ul>
+                <!-- ReqH11 -->
+                <li><a href="../index.html" data-i18n="nav.index"> Inicio</a></li>
+                <li><a href="unirse.html" data-i18n="nav.unirse"> Unirse</a></li>
+                <li><a href="personajes.html" class="activo" data-i18n="nav.personajes"> Personajes</a></li>
+            </ul>
+        </nav>
+
+         <main>
+            <!-- ReqH4 -->
+            <section>
+                <!-- ReqH5 -->
+                <h2 data-i18n="personajes.subtitulo">Aldeanos de Pueblo Pelicano</h2>
+                <article id="info-npc">
+                    <h3>Información útil sobre los NPCs</h3>
+                    <!-- ReqH6 -->
+                    <p>Es <strong>muy importante</strong> darles <dfn>regalos</dfn> a los aldeanos cada semana
+                        o en <dfn>ocasiones especiales</dfn> como su cumpleaños.
+                        Te lo agradecerán <em>muchísimo</em>.</p>
+                    <!-- ReqH7 -->
+                    <p>Un <dfn>evento de corazones</dfn> es una escena cinematográfica especial 
+                        que se desbloquea al alcanzar cierto nivel de amistad con un personaje.</p>
+                    <p>Si juegas en PC y quieres usar la consola de comandos para maximizar instantáneamente
+                        tu amistad con un personaje, debes introducir: <code>debug friendship "nombre_personaje" 2500</code></p>
+                    <p>Como dice uno de los personajes llamado Linus: 
+                        <cite>"Es agradable tener un amigo. La mayoría de la gente simplemente me ignora."</cite></p>
+                    
+                </article>
+            </section>
+
+            <section>
+                <h2>Clasificación de los Aldeanos</h2>
+
+                <!-- ReqH15 -->
+                <table>
+                    <caption>Los NPCs se organizan en cuatro principales grupos:</caption>
+                    <thead>
+                        <tr>
+                            <!-- rowspan = "2", significa que opupa dos filas-->
+                             <!-- colspan="2", significa que ocupa dos columnas -->
+                            <th rowspan="2" data-i18n="personajes.estado">Estado Civil</th> 
+                            <th colspan="2" data-i18n="personajes.genero">Género</th>
+                        </tr>
+                        <tr>
+                            <th data-i18n="personajes.chicas">Chicas</th>
+                            <th data-i18n="personajes.chicos">Chicos</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td data-i18n="personajes.matrimonio">Candidatos a matrimonio</td>
+                            <td>Abigail, Emily, Haley, Leah, Maru y Penny</td>
+                            <td>Alex, Elliott, Harvey, Sam, Sebastian y Shane</td>
+                        </tr>
+                        <tr>
+                            <td data-i18n="personajes.otros">Otros Aldeanos</td>
+                            <td>Caroline, Evelyn, Jas, Jodi, Marnie, Pam, Sandy y Robin</td>
+                            <td>Clint, Demetrius, George, Gus, Lewis, Linus, Pierre, Kent, Vicent, Rasmodius y Willy</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>Algunos personajes especiales no entran en la tabla anterior:</p>
+                <!-- ReqH14 -->
+                <ul>
+                    <li>Criaturas mágicas:
+                        <ol>
+                            <li>Krobus <em>(Puedes invitarlo a vivir contigo como compañero de piso, 
+                                pero no te puedes casar con él)</em></li>
+                            <li>Dwarf <em>(Necesitas los 4 pergaminos enanos para poder hablar con él)</em></li>
+                            <li>Señor Qi</li>
+                            <li>Abuelo</li>
+                        </ol>
+                    </li>
+                    <li>Personajes que no aceptan regalos: Gunther, Morris, Marlon y Gil.</li>
+                </ul>
+
+                <!-- RequH12 -->
+                <figure>
+                    <!-- ReqH9 y H10 -->
+                    <a href="https://es.stardewvalleywiki.com/Aldeanos" target="_blank"
+                        data-i18n-title="personajes.web"
+                        title="Ir a la Web Oficial de Stardew Valley">
+                        <img src="../resources/images/Personajes.png" 
+                        alt="NPCs en Stardew Valley" width="500"
+                        class="imgBorde">
+                    </a>
+                    <figcaption>Aldeanos en Stardew Valley</figcaption>
+                </figure>
+        </section>
+        
+        </main>
+
+        <footer>
+            <p data-i18n="footer.copy">&copy; 2026 Página de información sobre Stardew Valley</p>
+        </footer>
+    </body>
+</html>

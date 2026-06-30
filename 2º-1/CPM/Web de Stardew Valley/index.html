@@ -1,0 +1,120 @@
+<!-- ReqH1 -->
+<!DOCTYPE html>
+<html lang="es-ES">
+    <!-- ReqH2 -->
+    <head>
+        <meta charset = "utf-8">
+        <meta name= "viewport" content = "width=device-width, initial-scale=1.0">
+        <meta name="author" content = "Mónica Perdiguer Caso">
+        <meta name="description" content="Página de información sobre el videojuego Stardew Valley">
+        <meta name="keywords" content= "Stardew Valley, videojuego, RPG, ordenador">
+        <title>Stardew Valley Web</title>
+        <link rel="stylesheet" href="css/styles.css">
+        
+        <!--
+        Rutas relativas:
+        1. '.':
+            Representa el directorio actual.
+
+        2. './':
+            También apunta al directorio actual, pero se usa para iniciar una ruta relativa explícita.
+        Ejemplo: ./pages/contacto.html
+
+        3.  '/':
+            Apunta a la raíz del sitio (ruta absoluta dentro del dominio), no al directorio actual.
+        Ejemplo: /css/styles.css
+
+        4. Subir niveles:
+        ../   -> sube 1 nivel desde la carpeta actual
+        ../../ -> sube 2 niveles
+        ../../../ -> sube 3 niveles, etc.
+
+        Ejemplo desde /pages/eventos.html:
+        ../index.html      -> vuelve a la raíz del proyecto y abre index.html
+        ../css/styles.css  -> accede al CSS en la carpeta css
+        -->
+
+        <script defer src="./js/i18n/translations.js"></script>
+        <script defer src="./js/i18n/i18n.js"></script>
+    </head>
+
+    <body>
+        <!-- ReqH3 -->
+        <header>
+            <!-- ReqI18N6  -->
+            <div class="language-box"> 
+                <label for="language-switcher" data-i18n="common.language.label">Idioma</label> 
+                <select id="language-switcher" onchange="setLocale(this.value)"> 
+                    <option value="es" data-i18n="common.language.spanish">Español</option> 
+                    <option value="en" data-i18n="common.language.english">English</option> 
+                </select> 
+            </div>
+            <!-- ReqH5 -->
+            <h1 data-i18n="index.titulo">Bienvenido a Stardew Valley</h1>
+            <figure>
+                <!-- ReqH13 -->
+                <img src="resources/images/Logo.png" 
+                    data-i18n-alt="index.logo" 
+                    alt="Logo Stardew Valley" width="400">
+            </figure>
+        </header>
+
+        <!-- RequH8 -->
+        <nav>
+            <ul>
+                <!-- ReqH11 -->
+                <li><a href="pages/personajes.html" data-i18n="nav.personajes"> Personajes</a></li>
+                <li><a href="pages/unirse.html" data-i18n="nav.unirse"> Unirse</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <!-- ReqH4 -->
+            <section>
+                <!-- ReqH5 -->
+                <h2>Sobre el juego</h2>
+                <article>
+                    <h3>La historia sobre la granja</h3>
+                    <p>Heredaste la vieja parcela de tu abuelo en Stardew Valley.
+                        Armado con herramientas de segunda mano y unas pocas monedas, te dispones a comenzar tu nueva vida.</p>
+                    
+                    <p>
+                        <span data-i18n="juego.fecha">Próxima actualización:</span>
+                        <em id="juego-fecha" data-fecha="2026-11-04T19:30:00"></em>
+                    </p> 
+                    <p>
+                        <span data-i18n="juego.coste">Coste:</span>
+                        <em id="juego-coste" data-coste="13.99"></em>
+                    </p>
+                    <p id="resumen-dinamico" class="destacado"></p>
+                    <!-- RequH12 -->
+                    <figure >
+                        <img src="resources/images/CasaJugador.png" data-i18n-alt="img.casa"
+                        alt="Tu primera granja en Stardew Valley" width="250"
+                        class="imgBorde">
+                        <!-- ReqH13 -->
+                        <figcaption data-i18n="cap.casa">Tu primera granja en Stardew Valley</figcaption>
+                    </figure>
+                </article>
+            </section>
+
+            </section>
+            <section class="cuadrado">
+                <h3>Consejo para principiantes:</h3>
+                <p><strong>NO</strong> te olvides de revisar la television <em>todos los dias</em></p><br>
+                <p>Puedes ver los siguientes canales:</p>
+                <ul>
+                    <li><strong>El tiempo:</strong> Te dirá cómo estará el clima al día siguiente.</li>
+                    <li><strong>La pitonisa:</strong> Te dirá como será tu suerte en el día</li>
+                    <li><strong>La reina de la salsa:</strong> Te enseña recetas de comidas.</li>
+                    <li><strong>T.I.M.O. (Teléfono de Información de Mares y Océanos):</strong> Proporciona información sobre la pesca en la temporada actual.</li>
+                </ul>
+            </section>
+        </main>
+
+        <footer>
+            <p data-i18n="footer.copy">&copy; 2026 Página de información sobre Stardew Valley</p>
+        </footer>
+    </body>
+
+</html> 
