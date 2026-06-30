@@ -1,0 +1,63 @@
+select nombre, ciudad
+from clientes
+where lower(ciudad) = 'oviedo' or lower(ciudad) = 'gijon';
+
+select nombre, ciudad
+from clientes
+where upper(ciudad) = 'OVIEDO' or upper(ciudad) = 'GIJON';
+
+select nombre, precio, precio*1,16 as precioiva, existencias
+from productos;
+
+insert into productos values(20, 'pan', 50, 1);
+insert into productos (id_producto, nombre, precio)
+	values (21, 'aguacate', 2);
+	
+select c.id_cliente, nombre, id_pedido, fecha_pedido
+from clientes c inner join pedidos p
+	on c.id_cliente = p.id_cliente
+where fecha_pedido > '2009-12-31';
+
+select c.id_cliente, nombre, id_pedido, fecha_pedido
+from clientes c inner join pedidos using(id_cliente)
+where fecha_pedido > '2009-12-31';
+
+select c.id_cliente, c.nombre, id_pedido, fecha_pedido,
+	em.id_empleado, em.nombre
+from clientes c inner join pedidos using(id_cliente)
+	inner join empleados em using(id_empleado)
+where extract(year from fecha_pedido) = 2008 and
+	extract(month from fecha_pedido) = 1 and
+	lower(em.ciudad) = 'oviedo';
+	
+select nombre, count(*) as numero_pedidos
+from clientes c inner join pedidos using(id_cliente)
+group by c.id_cliente;
+
+select c.nombre, count(distinct id_pedido) as numero_pedidos,
+sum(cantidad*precio) as importe_total
+from clientes c inner join pedidos using(id_cliente)
+inner join detalles_pedidos using(id_pedido)
+inner join productos using(id_producto)
+group c.id_cliente
+order by importe_total desc limit 4;
+
+select c.id_cliente, c.nombre, em.id_empleado,
+	em.nombre as nombre_empleado
+from clientes c left join pedidos using(id_cliente)
+	left inner join empleados em using(id_empleados);
+	
+select c.id_cliente, c.nombre, em.id_empleado,
+	em.nombre as nombre_empleado
+from clientes c left join pedidos using(id_cliente)
+	full inner join empleados em using(id_empleados);
+	
+delete from productos where id_producto = 20 or id_producto=21;
+
+SELECT id_producto, nombre FROM productos p1 WHERE
+NOT EXISTS(
+(SELECT id_pedido FROM pedidos)
+EXCEPT
+(SELECT id_pedido FROM detalles_pedido dp2 WHERE
+	p1.id_producto=dp2.id_producto)
+);
